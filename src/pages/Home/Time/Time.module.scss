@@ -1,0 +1,23 @@
+@import "styles/variables";
+
+.timeContainer {
+    @include centered();
+    flex-direction: row;
+    padding-right: 4%;
+    margin-top: 3%;
+    &__number, &__division {
+        font-weight: 600;
+        font-family: "Jost", serif;
+        font-size: 5rem;
+    }
+}
+
+.timeTextContainer {
+    @include centered();
+    margin: 0;
+    &__text {
+        font-size: 0.8rem;
+        font-weight: bold;
+        margin: 0;
+    }
+}

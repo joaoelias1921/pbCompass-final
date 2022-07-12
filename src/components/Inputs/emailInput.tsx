@@ -31,7 +31,6 @@ export default function EmailInput() {
                         setEmail(event.target.value),
                         validateEmail(event.target)
                     )}
-                    required
                 />
                 <AiOutlineUser size={25} />
             </div>

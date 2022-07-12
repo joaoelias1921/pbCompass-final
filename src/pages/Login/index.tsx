@@ -1,8 +1,6 @@
 import styles from "./Login.module.scss";
 import Logo from "assets/login/compass-logo.png";
 import { useNavigate } from "react-router-dom";
-import { AiOutlineUser } from "react-icons/ai";
-import { BiLock } from "react-icons/bi";
 import { useContext } from "react";
 import { UserContext } from "common/context/User";
 import classNames from "classnames";
