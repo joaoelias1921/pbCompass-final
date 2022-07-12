@@ -1,29 +1,46 @@
-.sobreNos {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 50px;
-    &__texto {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-align: justify;
-  p {
-        font-family: 'Josefin Sans', sans-serif;
-      }
-    }
-  }
-  .imagens {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: space-between;
-    &__imagem {
-      width: 600px;
-      img {
-        border-radius: 5px;
-        width: 100%;
-      }
-    }
-  }
+@import "styles/variables";
+
+.mainContainer {
+	@include centered();
+	width: 100%;
+
+	.mainContent {
+		@include centered();
+		width: 100%;
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+
+	.largeBgContainer {
+		@include centered();
+		align-items: flex-start;
+		width: 40%;
+		img {
+			width: 80%;
+		}
+	}
+
+	.textsContainer {
+		@include centered();
+		margin-top: 5%;
+		width: 60%;
+		&__textBox {
+			@include centered();
+			width: 100%;
+			margin-right: 25%;
+			margin-bottom: 3%;
+			text-align: right;
+			align-items: flex-end;
+		}
+		&__engText {
+			font-size: 2.6rem;
+			font-weight: bold;
+			font-family: "Work Sans", serif;
+			color: $home-font;
+		}
+		&__engText--small {
+			font-size: 1.5rem;
+		}
+	}
+}
