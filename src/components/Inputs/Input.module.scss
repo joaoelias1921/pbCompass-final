@@ -1,0 +1,23 @@
+@import "styles/variables";
+
+.inputContainer {
+    @include centered();
+    flex-direction: row;
+    margin-bottom: 8%;
+    width: 100%;
+    input {
+        width: 100%;
+        background: transparent;
+        color: $login-font;
+        border: 1px solid $login-font;
+        outline: none;
+        border-radius: 30px;
+        font-size: 0.8rem;
+        padding: 15px;
+        margin-right: 2%;
+        transition: 240ms ease-in-out;
+        &:hover, &:focus {
+            background-color: $gradient-dark;
+        }
+    }
+}

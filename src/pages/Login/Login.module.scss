@@ -32,25 +32,15 @@
 			&__title {
 				font-weight: normal;
 			}
-			.inputContainer {
+			.errorContainer {
 				@include centered();
-				flex-direction: row;
-				margin-bottom: 8%;
+				display: none;
 				width: 100%;
-				input {
-					width: 100%;
-					background: transparent;
-					color: $login-font;
-					border: 1px solid $login-font;
-					outline: none;
-					border-radius: 30px;
+				p {
+					color: $login-font-error;
+					font-weight: bold;
 					font-size: 0.8rem;
-					padding: 15px;
-					margin-right: 5%;
-					transition: 240ms ease-in-out;
-					&:hover, &:focus {
-						background-color: $gradient-dark;
-					}
+					margin: 0;
 				}
 			}
 			.buttonContainer {
