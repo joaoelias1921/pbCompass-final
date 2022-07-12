@@ -1,0 +1,16 @@
+$gradient-dark: #33383D;
+$gradient-darker: #1C1D20;
+$btn-orange: #FF2D04;
+$btn-darker-orange: #C13216;
+$login-font: #E0E0E0;
+$login-font-error: #E9B425;
+$home-font: #C12D18;
+$home-nav-font: #C13216;
+
+@mixin centered {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}

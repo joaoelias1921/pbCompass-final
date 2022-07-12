@@ -1,7 +1,6 @@
-import Footer from "components/Footer";
-import Inicio from "pages/Login";
+import Login from "pages/Login";
 import NotFound from "pages/NotFound";
-import Sobre from "pages/Home";
+import Home from "pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function AppRouter() {
@@ -9,11 +8,10 @@ export default function AppRouter() {
 		<main className="container">
 			<Router>
 				<Routes>
-					<Route path="/" element={<Inicio />} />
-					<Route path="home" element={<Sobre />} />
+					<Route path="/" element={<Login />} />
+					<Route path="home" element={<Home />} />
 					<Route path="*" element={<NotFound />} />		
 				</Routes>
-				<Footer />
 			</Router>
 		</main>
 	);
