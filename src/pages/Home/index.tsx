@@ -20,15 +20,13 @@ export default function Home() {
 		pt: "que permitam o crescimento dos nossos clientes"
 	}];
 	return (
-		<main className={styles.mainContainer}>
+		<section className={styles.mainContainer}>
 			<HomeHeader />
 			<section className={styles.mainContent}>
-				<section className={styles.largeBgContainer}>
-					<img src={LargeLogo} alt="Large Compass Logo" />
-				</section>
+				<section className={styles.largeBgContainer}></section>
 				<section className={styles.textsContainer}>
-					{texts.map(text => (
-						<div className={styles.textsContainer__textBox}>
+					{texts.map((text, index) => (
+						<div key={index} className={styles.textsContainer__textBox}>
 							<span className={classNames({
 								[styles.textsContainer__engText]: true,
 								[styles[`textsContainer__engText--small`]]: text.small
@@ -39,6 +37,6 @@ export default function Home() {
 				</section>
 			</section>
 			<Footer />
-		</main>
+		</section>
 	);
 }

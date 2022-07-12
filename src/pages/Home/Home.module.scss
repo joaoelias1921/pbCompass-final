@@ -3,6 +3,7 @@
 .mainContainer {
 	@include centered();
 	width: 100%;
+	background: linear-gradient(90deg, $homeBg-lighter 0%, $homeBg-light 100%);
 
 	.mainContent {
 		@include centered();
@@ -10,20 +11,22 @@
 		flex-direction: row;
 		align-items: flex-start;
 		justify-content: space-between;
+		background-image: url("../../assets/home/compasslogo-large.png");
+		background-repeat: no-repeat;
+		background-size: 25%;
 	}
 
 	.largeBgContainer {
 		@include centered();
 		align-items: flex-start;
+		justify-content: flex-start;
 		width: 40%;
-		img {
-			width: 80%;
-		}
 	}
 
 	.textsContainer {
 		@include centered();
-		margin-top: 5%;
+		margin-top: 3%;
+		margin-bottom: 4%;
 		width: 60%;
 		&__textBox {
 			@include centered();
@@ -34,13 +37,13 @@
 			align-items: flex-end;
 		}
 		&__engText {
-			font-size: 2.6rem;
+			font-size: 2.4rem;
 			font-weight: bold;
 			font-family: "Work Sans", serif;
 			color: $home-font;
 		}
 		&__engText--small {
-			font-size: 1.5rem;
+			font-size: 1.3rem;
 		}
 	}
 }

@@ -1,9 +1,83 @@
 @import "styles/variables";
-@import "styles/breakpoints";
-
 
 .footer {
-	background-color: red;
-	display: flex;
-	justify-content: flex-end;
+	@include centered();
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 100%;
+	height: 100%;
+	.counterSide {
+		@include centered();
+		flex-direction: row;
+		width: 80%;
+		height: 100%;
+		color: white;
+		font-size: 0.8rem;
+		background: linear-gradient(90deg, $footer-dark 0%, $footer-darker 100%);
+		&__textLeft {
+			width: 50%;
+			margin-right: 4%;
+			text-align: right;
+			p {
+				font-size: 0.8rem;
+			}
+		}
+		&__textRight {
+			@include centered();
+			flex-direction: row;
+			justify-content: flex-end;
+			width: 30%;
+			.appRefresh {
+				margin-right: 5%;
+				word-wrap: break-word;
+				width: 30%;
+				text-align: right
+			}
+			.counterContainer {
+				@include centered();
+				width: 45%;
+				span {
+					font-family: "Jost", serif;
+					font-size: 3rem;
+				}
+				p {
+					margin: 0;
+				}
+			}
+		}
+	}
+	.linkContainer {
+		@include centered();
+		word-wrap: break-word;
+		background-color: white;
+		width: 10%;
+		height: 100%;
+		cursor: pointer;
+		transition: 240ms ease-in-out;
+		&:hover {
+			background-color: lightgrey;
+		}
+		&__text {
+			width: 90%;
+			color: $home-nav-font;
+			font-weight: bold;
+			font-size: 0.9rem;
+		}
+	}
+	.logoutContainer {
+		@include centered();
+		width: 10%;
+		height: 100%;
+		background-color: $footer-darker;
+		transition: 240ms ease-in-out;
+		cursor: pointer;
+		&:hover {
+			background-color: $footer-dark;
+		}
+		&__text {
+			font-weight: bold;
+			font-size: 0.8rem;
+			color: white;
+		}
+	}
 }

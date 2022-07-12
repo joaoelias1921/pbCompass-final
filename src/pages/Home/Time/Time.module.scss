@@ -3,7 +3,6 @@
 .timeContainer {
     @include centered();
     flex-direction: row;
-    padding-right: 4%;
     margin-top: 3%;
     &__number, &__division {
         font-weight: 600;
@@ -16,8 +15,7 @@
     @include centered();
     margin: 0;
     &__text {
-        font-size: 0.8rem;
+        font-size: 0.6rem;
         font-weight: bold;
-        margin: 0;
     }
 }
