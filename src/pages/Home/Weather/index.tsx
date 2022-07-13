@@ -1,26 +1,29 @@
 import styles from "./Weather.module.scss";
 import Cloudy from "assets/home/cloudy.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Weather() {
     const [degrees, setDegrees] = useState<number>(0);
     const [city, setCity] = useState("");
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=Mafra&units=metric&appid=ab85ba57bbbb423fb62bfb8201126ede";
+    
+    function fetchWeather() {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            let lat = position.coords.latitude;
+            let long = position.coords.longitude;        
 
-    function fetchWeather(url: string) {
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                const { main, name } = data;
-                setCity(`${name} - SC`);
+            fetch(`https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=bf0de12f9df4e3c21f2fb18a7606c041`)
+            .then(res => res.json())
+            .then(result => {
+                const { main, name } = result;
+                setCity(`${name} - SC`)
                 setDegrees(Math.round(main.temp));
-                }
-            )
+            });
+        });
     }
 
     return(
         <>
-            <div onLoad={() => fetchWeather(url)} className={styles.weatherContainer}>
+            <div onLoad={() => fetchWeather()} className={styles.weatherContainer}>
                 <span className={styles.weatherContainer__location}>{city}</span>
                 <div className={styles.weatherContainer__weather}>
                     <img src={Cloudy} alt="Cloudy icon" />
