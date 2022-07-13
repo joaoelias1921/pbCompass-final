@@ -1,6 +1,6 @@
 import styles from "./Weather.module.scss";
 import Cloudy from "assets/home/cloudy.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Weather() {
     const [degrees, setDegrees] = useState<number>(0);
@@ -21,9 +21,13 @@ export default function Weather() {
         });
     }
 
+    useEffect(() => {
+        fetchWeather();
+    });
+
     return(
         <>
-            <div onLoad={() => fetchWeather()} className={styles.weatherContainer}>
+            <div className={styles.weatherContainer}>
                 <span className={styles.weatherContainer__location}>{city}</span>
                 <div className={styles.weatherContainer__weather}>
                     <img src={Cloudy} alt="Cloudy icon" />

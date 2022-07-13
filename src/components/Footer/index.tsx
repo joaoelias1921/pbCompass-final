@@ -21,6 +21,10 @@ export default function Footer() {
 		}, 1000);
 	}
 
+	useEffect(() => {
+		countdown(counter);
+	});
+
 	//cleaning state on component unmount to prevent errors/warnings
 	useEffect(() => {
 		return () => {
@@ -34,7 +38,7 @@ export default function Footer() {
 	}
 
 	return (
-		<footer onLoad={() => countdown(counter)} className={styles.footer}>
+		<footer className={styles.footer}>
 			<section className={styles.counterSide}>
 				<div className={styles.counterSide__textLeft}>
 					<p>Essa janela do navegador é usada para manter sua sessão de autenticação ativa. Deixe-a aberta em segundo plano e abra uma nova janela para continuar a navegar.</p>
