@@ -42,6 +42,9 @@
 					font-size: 0.8rem;
 					margin: 0;
 				}
+				&__active {
+					display: flex;
+				}
 			}
 			.buttonContainer {
 				@include centered();

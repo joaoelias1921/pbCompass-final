@@ -5,20 +5,18 @@ import styles from "./Input.module.scss";
 import classNames from "classnames";
 
 export default function EmailInput() {
-    const { email, setEmail, setEmailValid } = useContext(UserContext);
+    const { email, setEmail, setEmailValid, setErrorActive } = useContext(UserContext);
     const [inputActive, setInputActive] = useState(false);
     const [iconInactive, setIconInactive] = useState(false);
 
     function validateEmail(email: HTMLInputElement) {
-		let error = document.querySelector(".errorContainer")! as HTMLDivElement;
-
 		if(!email.value.includes("@") || !email.value.includes(".com")){
 			email.style.border = "1px solid #E9B425";
-			error.style.display = "flex";
+			setErrorActive(true);
 			setEmailValid(false);
 		}else {
 			email.style.border = "";
-			error.style.display = "none";
+			setErrorActive(false);
 			setEmailValid(true);
 		}
 	}

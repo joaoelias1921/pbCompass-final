@@ -1,6 +1,6 @@
 import styles from "./Footer.module.scss";
 import Line from "assets/home/separation.png";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "common/context/User";
 
@@ -20,6 +20,13 @@ export default function Footer() {
 			}
 		}, 1000);
 	}
+
+	//cleaning state on component unmount to prevent errors/warnings
+	useEffect(() => {
+		return () => {
+		  setCounter(0); 
+		};
+	}, []);
 
 	function clearContext() {
 		setEmail("");

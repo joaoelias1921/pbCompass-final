@@ -8,6 +8,7 @@ export const UserProvider = ({ children }) => {
     const [emailValid, setEmailValid] = useState(true);
     const [password, setPassword] = useState("");
     const [passValid, setPassValid] = useState(true);
+    const [errorActive, setErrorActive] = useState(false);
     return (
         <UserContext.Provider value={ {
             email, 
@@ -18,6 +19,8 @@ export const UserProvider = ({ children }) => {
             setPassword,
             passValid,
             setPassValid,
+            errorActive, 
+            setErrorActive
         }}>
             {children}
         </UserContext.Provider>

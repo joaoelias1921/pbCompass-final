@@ -1,7 +1,7 @@
 import styles from "./Login.module.scss";
 import Logo from "assets/login/compass-logo.png";
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "common/context/User";
 import classNames from "classnames";
 import EmailInput from "components/Inputs/emailInput";
@@ -10,6 +10,7 @@ import PasswordInput from "components/Inputs/passwordInput";
 export default function Login() {
 	const navigate = useNavigate();
 	const { emailValid, passValid } = useContext(UserContext);
+	const [errorActive, setErrorActive] = useState(false);
 
 	function redirectToHome() {
 		navigate("/home");
@@ -17,13 +18,12 @@ export default function Login() {
 
 	function validateForm() {
 		let inputs = document.querySelectorAll("input");
-		let error = document.querySelector(".errorContainer")! as HTMLDivElement;
 		let valid = true;
 		inputs.forEach(input => {
 			if(input.value == "") {
 				valid = false;
 				input.style.border = "1px solid #E9B425";
-				error.style.display = "flex";
+				setErrorActive(true);
 			}
 		});
 
@@ -48,7 +48,7 @@ export default function Login() {
 						<PasswordInput />
 						<div className={classNames({
 							[styles.errorContainer]: true,
-							"errorContainer": true
+							[styles.errorContainer__active]: errorActive
 						})}>
 							<p>Ops, usuário ou senha inválidos.</p>
 							<p>Tente novamente!</p>
