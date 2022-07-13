@@ -3,10 +3,9 @@
 .weatherContainer {
     @include centered();
     width: 100%;
-    padding: 5px;
+    padding: 10px;
     &__location {
         font-weight: normal;
-        font-size: 0.8rem;
     }
     &__weather {
         @include centered();
@@ -15,7 +14,7 @@
         justify-content: flex-start;
         flex-direction: row;
         span {
-            margin-left: 5%;
+            margin-left: 8%;
             font-size: 2rem;
             font-weight: bold;
         }

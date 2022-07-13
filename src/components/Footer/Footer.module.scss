@@ -52,16 +52,27 @@
 		background-color: white;
 		width: 10%;
 		height: 100%;
-		cursor: pointer;
 		transition: 240ms ease-in-out;
+		cursor: pointer;
 		&:hover {
 			background-color: lightgrey;
 		}
-		&__text {
-			width: 90%;
-			color: $home-nav-font;
-			font-weight: bold;
-			font-size: 0.9rem;
+		a {
+			@include centered();
+			width: 100%;
+			height: 100%;
+			text-decoration: none;
+			.navButton {
+				width: 100%;
+				height: 100%;
+				outline: none;
+				border: none;
+				background: transparent;
+				color: $home-nav-font;
+				font-weight: bold;
+				font-size: 0.9rem;
+				cursor: pointer;
+			}
 		}
 	}
 	.logoutContainer {
@@ -70,14 +81,19 @@
 		height: 100%;
 		background-color: $footer-darker;
 		transition: 240ms ease-in-out;
-		cursor: pointer;
 		&:hover {
 			background-color: $footer-dark;
 		}
-		&__text {
+		&__button {
+			width: 100%;
+			height: 100%;
 			font-weight: bold;
 			font-size: 0.8rem;
 			color: white;
+			background: transparent;
+			outline: none;
+			border: none;
+			cursor: pointer;
 		}
 	}
 }
