@@ -1,10 +1,13 @@
 import { UserContext } from "common/context/User";
-import { useContext } from "react";
-import { BiLock } from "react-icons/bi";
+import { useContext, useState } from "react";
+import passIcon from "assets/login/pass-icon.png";
 import styles from "./Input.module.scss";
+import classNames from "classnames";
 
 export default function PasswordInput() {
     const { password, setPassword, setPassValid } = useContext(UserContext);
+    const [inputActive, setInputActive] = useState(false);
+    const [iconInactive, setIconInactive] = useState(false);
 
     function validatePassword(password: HTMLInputElement) {
         let error = document.querySelector(".errorContainer")! as HTMLDivElement;
@@ -20,19 +23,42 @@ export default function PasswordInput() {
         }
     }
 
+    function activateInput(input: HTMLInputElement) {
+        setIconInactive(true);
+        setInputActive(true);
+    }
+
+    function deactivateInput(input: HTMLInputElement) {
+        setIconInactive(false);
+        setInputActive(false);
+    }
+
     return (
         <>
             <div className={styles.inputContainer}>
                 <input
+                    className={classNames({
+                        [styles.formInput]: true,
+                        [styles["passFormInput--active"]]: inputActive
+                    })}
                     type="password"
                     placeholder="Senha"
                     value={password}
+                    onFocus={(event) => activateInput(event.target)}
+                    onBlur={(event) => deactivateInput(event.target)}
                     onChange={(event) => (
                         setPassword(event.target.value),
                         validatePassword(event.target)
                     )}
                 />
-                <BiLock size={25} />
+                <img 
+                    className={classNames({
+                        ["passIcon"]: true,
+                        [styles.inactiveIcon]: iconInactive
+                    })}
+                    src={passIcon} 
+                    alt="Password Icon" 
+                />
             </div>
         </>
     );

@@ -1,10 +1,13 @@
 import { UserContext } from "common/context/User";
-import { useContext } from "react";
-import { AiOutlineUser } from "react-icons/ai";
+import { useContext, useState } from "react";
+import userIcon from "assets/login/user-icon.png";
 import styles from "./Input.module.scss";
+import classNames from "classnames";
 
 export default function EmailInput() {
     const { email, setEmail, setEmailValid } = useContext(UserContext);
+    const [inputActive, setInputActive] = useState(false);
+    const [iconInactive, setIconInactive] = useState(false);
 
     function validateEmail(email: HTMLInputElement) {
 		let error = document.querySelector(".errorContainer")! as HTMLDivElement;
@@ -20,19 +23,42 @@ export default function EmailInput() {
 		}
 	}
 
+    function activateInput(input: HTMLInputElement) {
+        setIconInactive(true);
+        setInputActive(true);
+    }
+
+    function deactivateInput(input: HTMLInputElement) {
+        setIconInactive(false);
+        setInputActive(false);
+    }
+
     return (
         <>
             <div className={styles.inputContainer}>
                 <input
+                    className={classNames({
+                        [styles.formInput]: true,
+                        [styles["userFormInput--active"]]: inputActive
+                    })}
                     type="email"
                     placeholder="Usuário"
                     value={email}
+                    onFocus={(event) => activateInput(event.target)}
+                    onBlur={(event) => deactivateInput(event.target)}
                     onChange={(event) => (
                         setEmail(event.target.value),
                         validateEmail(event.target)
                     )}
                 />
-                <AiOutlineUser size={25} />
+                <img
+                    className={classNames({
+                        ["userIcon"]: true,
+                        [styles.inactiveIcon]: iconInactive
+                    })} 
+                    src={userIcon} 
+                    alt="User Icon" 
+                />
             </div>
         </>
     )

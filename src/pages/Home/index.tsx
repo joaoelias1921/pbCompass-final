@@ -2,7 +2,6 @@ import Footer from "components/Footer";
 import HomeHeader from "components/HomeHeader";
 import styles from "./Home.module.scss";
 import classNames from "classnames";
-import { useNavigate } from "react-router-dom";
 
 export default function Home() {
 	const texts = [{
