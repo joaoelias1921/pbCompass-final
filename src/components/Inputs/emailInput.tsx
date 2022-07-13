@@ -51,7 +51,7 @@ export default function EmailInput() {
                 />
                 <img
                     className={classNames({
-                        ["userIcon"]: true,
+                        [styles.userIcon]: true,
                         [styles.inactiveIcon]: iconInactive
                     })} 
                     src={userIcon} 

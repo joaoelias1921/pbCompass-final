@@ -51,7 +51,7 @@ export default function PasswordInput() {
                 />
                 <img 
                     className={classNames({
-                        ["passIcon"]: true,
+                        [styles.passIcon]: true,
                         [styles.inactiveIcon]: iconInactive
                     })}
                     src={passIcon} 

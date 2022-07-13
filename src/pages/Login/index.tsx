@@ -36,35 +36,37 @@ export default function Login() {
 
 	return (
 		<>
-			<section className={styles.leftContainer}>
-				<div className={styles.loginContainer}>
-					<div className={styles.titleContainer}>
-						<h3 className={styles.titleContainer__title}>Olá,</h3>
-						<p className={styles.titleContainer__text}>Para continuar navegando de forma segura, efetue o login na rede.</p>
-					</div>
-					<div className={styles.loginForm}>
-						<h3 className={styles.loginForm__title}>Login</h3>
-						<EmailInput />
-						<PasswordInput />
-						<div className={classNames({
-							[styles.errorContainer]: true,
-							[styles.errorContainer__active]: errorActive
-						})}>
-							<p>Ops, usuário ou senha inválidos.</p>
-							<p>Tente novamente!</p>
+			<section className={styles.mainContainer}>
+				<section className={styles.leftContainer}>
+					<div className={styles.loginContainer}>
+						<div className={styles.titleContainer}>
+							<h3 className={styles.titleContainer__title}>Olá,</h3>
+							<p className={styles.titleContainer__text}>Para continuar navegando de forma segura, efetue o login na rede.</p>
 						</div>
-						<div className={styles.buttonContainer}>
-							<button 
-								onClick={() => validateForm()}
-								className={styles.buttonContainer__button}
-							>Continuar
-							</button>
+						<div className={styles.loginForm}>
+							<h3 className={styles.loginForm__title}>Login</h3>
+							<EmailInput />
+							<PasswordInput />
+							<div className={classNames({
+								[styles.errorContainer]: true,
+								[styles.errorContainer__active]: errorActive
+							})}>
+								<p>Ops, usuário ou senha inválidos.</p>
+								<p>Tente novamente!</p>
+							</div>
+							<div className={styles.buttonContainer}>
+								<button 
+									onClick={() => validateForm()}
+									className={styles.buttonContainer__button}
+								>Continuar
+								</button>
+							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-			<section className={styles.bgContainer}>
-				<img src={Logo} alt="Compass Logo" />
+				</section>
+				<section className={styles.bgContainer}>
+					<img src={Logo} alt="Compass Logo" />
+				</section>
 			</section>
 		</>
 	);

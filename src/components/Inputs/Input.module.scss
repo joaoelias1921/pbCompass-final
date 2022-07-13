@@ -21,6 +21,10 @@
         }
     }
 
+    .userIcon, .passIcon {
+        width: 18px;
+    }
+
     .userFormInput--active {
         padding-right: 12%;
         background-image: url("../../assets/login/user-icon.png");
