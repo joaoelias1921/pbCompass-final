@@ -25,6 +25,11 @@
         width: 15px;
     }
 
+    .formInput--invalid {
+        border: 1px solid #E9B425;
+        transition: 240ms ease-in-out;
+    }
+
     .userFormInput--active {
         padding-right: 12%;
         background-image: url("../../assets/login/user-icon.png");

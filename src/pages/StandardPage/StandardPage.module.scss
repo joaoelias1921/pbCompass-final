@@ -1,0 +1,51 @@
+@import 'styles/variables';
+
+.mainContainer {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	min-height: 100vh;
+	.leftContainer {
+		@include centered();
+		width: 50%;
+		background: linear-gradient($gradient-dark 0%, $gradient-darker 100%);
+		color: $login-font;
+	}
+}
+
+.bgContainer {
+	@include centered();
+	justify-content: flex-start;
+	width: 50%;
+	background-image: url("../../assets/login/bg-laptop.png");
+	background-position: left 15%;
+	background-size: cover;
+	background-repeat: no-repeat;
+	padding: 15px;
+	img{
+		width: 30%;
+	}
+}
+
+@media screen and(max-width: 1024px) {
+	.bgContainer {
+		background-position: top left 30%;
+	}
+}
+
+@media screen and(max-width: 768px) {
+	.mainContainer {
+		flex-direction: column;
+		.leftContainer {
+			width: 100%;
+		}
+		.bgContainer {
+			width: 100%;
+			height: 100%;
+			justify-content: center;
+			img {
+				margin: 10%;
+			}
+		}
+	}
+}

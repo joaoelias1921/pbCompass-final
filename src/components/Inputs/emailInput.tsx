@@ -1,15 +1,15 @@
 import { UserContext } from "common/context/User";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import userIcon from "assets/login/user-icon.png";
 import styles from "./Input.module.scss";
 import classNames from "classnames";
 
 export default function EmailInput() {
-    const { email, setEmail, setEmailValid, setErrorActive } = useContext(UserContext);
+    const { email, setEmail, emailValid, setEmailValid, setErrorActive } = useContext(UserContext);
     const [inputActive, setInputActive] = useState(false);
     const [iconInactive, setIconInactive] = useState(false);
 
-    function validateEmail(email: HTMLInputElement) {
+    /*function validateEmail(email: HTMLInputElement) {
 		if(!email.value.includes("@") || !email.value.includes(".com")){
 			email.style.border = "1px solid #E9B425";
 			setErrorActive(true);
@@ -19,7 +19,17 @@ export default function EmailInput() {
 			setErrorActive(false);
 			setEmailValid(true);
 		}
-	}
+	}*/
+
+    useEffect(() => {
+        if(!email.includes("@") || !email.includes(".com") || email == "") {
+            setErrorActive(true);
+            setEmailValid(false);
+        }else {
+            setErrorActive(false);
+            setEmailValid(true);
+        }
+    }, [email]);
 
     function activateInput(input: HTMLInputElement) {
         setIconInactive(true);
@@ -37,7 +47,8 @@ export default function EmailInput() {
                 <input
                     className={classNames({
                         [styles.formInput]: true,
-                        [styles["userFormInput--active"]]: inputActive
+                        [styles["userFormInput--active"]]: inputActive,
+                        [styles["formInput--invalid"]]: !emailValid
                     })}
                     type="email"
                     placeholder="Usuário"
@@ -45,8 +56,8 @@ export default function EmailInput() {
                     onFocus={(event) => activateInput(event.target)}
                     onBlur={(event) => deactivateInput(event.target)}
                     onChange={(event) => (
-                        setEmail(event.target.value),
-                        validateEmail(event.target)
+                        setEmail(event.target.value)
+                        //validateEmail(event.target)
                     )}
                 />
                 <img

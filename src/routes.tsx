@@ -1,8 +1,9 @@
 import Login from "pages/Login";
-import NotFound from "pages/NotFound";
 import Home from "pages/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserProvider } from "common/context/User";
+import StandardPage from "pages/StandardPage";
+import Register from "pages/Register";
 
 export default function AppRouter() {
 	return (
@@ -10,9 +11,11 @@ export default function AppRouter() {
 			<Router>
 				<UserProvider>
 					<Routes>
-						<Route path="/" element={<Login />} />
+						<Route path="/" element={<StandardPage />}>
+							<Route path="login" element={<Login />} />
+							<Route path="register" element={<Register />} />
+						</Route>
 						<Route path="home" element={<Home />} />
-						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</UserProvider>			
 			</Router>

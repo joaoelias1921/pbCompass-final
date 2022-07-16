@@ -1,15 +1,15 @@
 import { UserContext } from "common/context/User";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import passIcon from "assets/login/pass-icon.png";
 import styles from "./Input.module.scss";
 import classNames from "classnames";
 
 export default function PasswordInput() {
-    const { password, setPassword, setPassValid, setErrorActive } = useContext(UserContext);
+    const { password, setPassword, passValid, setPassValid, setErrorActive } = useContext(UserContext);
     const [inputActive, setInputActive] = useState(false);
     const [iconInactive, setIconInactive] = useState(false);
 
-    function validatePassword(password: HTMLInputElement) {
+    /*function validatePassword(password: HTMLInputElement) {
         if (password.value.length < 3) {
             password.style.border = "1px solid #E9B425";
             setErrorActive(true);
@@ -19,7 +19,17 @@ export default function PasswordInput() {
             setErrorActive(false);
             setPassValid(true);
         }
-    }
+    }*/
+
+    useEffect(() => {
+        if(password == "" || password.length < 3) {
+            setErrorActive(true);
+            setPassValid(false);
+        }else {
+            setErrorActive(false);
+            setPassValid(true);
+        }
+    }, [password]);
 
     function activateInput(input: HTMLInputElement) {
         setIconInactive(true);
@@ -37,7 +47,8 @@ export default function PasswordInput() {
                 <input
                     className={classNames({
                         [styles.formInput]: true,
-                        [styles["passFormInput--active"]]: inputActive
+                        [styles["passFormInput--active"]]: inputActive,
+                        [styles["formInput--invalid"]]: !passValid
                     })}
                     type="password"
                     placeholder="Senha"
@@ -45,8 +56,8 @@ export default function PasswordInput() {
                     onFocus={(event) => activateInput(event.target)}
                     onBlur={(event) => deactivateInput(event.target)}
                     onChange={(event) => (
-                        setPassword(event.target.value),
-                        validatePassword(event.target)
+                        setPassword(event.target.value)
+                        //validatePassword(event.target)
                     )}
                 />
                 <img 
