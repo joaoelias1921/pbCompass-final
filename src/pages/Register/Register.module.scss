@@ -6,10 +6,10 @@
 	width: 50%;
 	.titleContainer{
 		@include centered();
-		margin-bottom: 20%;
 		align-self: flex-start;
 		align-items: flex-start;
 		text-align: left;
+		margin-top: 3%;
 		width: 80%;
 		&__title {
 			font-weight: normal;
@@ -44,10 +44,10 @@
 		}
 		.buttonContainer {
 			@include centered();
-			margin-top: 15%;
+			margin-top: 5%;
 			width: 100%;
 			&__button {
-				width: 90%;
+				width: 100%;
 				align-self: flex-start;
 				padding: 15px;
 				border: none;
@@ -67,7 +67,6 @@
 		.loginAccount {
 			@include centered();
 			width: 100%;
-			align-items: flex-start;
 			margin-top: 5%;
 			p {				
 				.loginLink {

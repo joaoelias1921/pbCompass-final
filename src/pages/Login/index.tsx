@@ -1,6 +1,6 @@
 import styles from "./Login.module.scss";
 import { useNavigate, Link } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "common/context/User";
 import classNames from "classnames";
 import EmailInput from "components/Inputs/emailInput";
@@ -10,8 +10,14 @@ import { auth, logInWithEmailAndPassword } from "firebase.js";
 
 export default function Login() {
 	const navigate = useNavigate();
-	const { email, password, emailValid, passValid } = useContext(UserContext);
-	const [errorActive, setErrorActive] = useState(false);
+	const { 
+		email, 
+		password, 
+		setEmailValid, 
+		setPassValid,
+		errorActive, 
+		setErrorActive
+	} = useContext(UserContext);
 	const [user, loading] = useAuthState(auth);
 
 	useEffect(() => {
@@ -20,18 +26,16 @@ export default function Login() {
 	}, [user, loading]);
 
 	function validateForm() {
-		let inputs = document.querySelectorAll("input");
-		let valid = true;
-		inputs.forEach(input => {
-			if (input.value == "") {
-				valid = false;
-				input.style.border = "1px solid #E9B425";
-				setErrorActive(true);
-			}
-		});
-
-		if (!emailValid || !passValid || !valid) {
+		if (email == "" && password == "") {
+			setErrorActive(true);
+            setEmailValid(false);
+            setPassValid(false);
 			return;
+		}else if(email == "" || password == ""){
+            setErrorActive(true);
+            email == "" ? setEmailValid(false) : setPassValid(false);
+        }else{
+			logInWithEmailAndPassword(email, password);
 		}
 	}
 
@@ -55,7 +59,7 @@ export default function Login() {
 					</div>
 					<div className={styles.buttonContainer}>
 						<button
-							onClick={() => (validateForm(), logInWithEmailAndPassword(email, password))}
+							onClick={() => (validateForm())}
 							className={styles.buttonContainer__button}
 						>Continuar
 						</button>

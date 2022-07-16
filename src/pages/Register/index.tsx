@@ -1,34 +1,40 @@
 import styles from "./Register.module.scss";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "common/context/User";
 import classNames from "classnames";
 import EmailInput from "components/Inputs/emailInput";
 import PasswordInput from "components/Inputs/passwordInput";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { auth, registerWithEmailAndPassword } from "firebase.js";
+import PassValidation from "./PassValidation";
 
 export default function Register() {
     const navigate = useNavigate();
-    const { email, password, emailValid, passValid } = useContext(UserContext);
-    const [errorActive] = useState(false);
+    const { 
+        email, 
+        password, 
+        emailValid,
+        passValid,
+        errorActive,
+        setErrorActive,
+    } = useContext(UserContext);
     const [user, loading] = useAuthState(auth);
-
-    const register = () => {
-        if (!email) alert("Please enter an email");
-        registerWithEmailAndPassword(email, password);
-    }
 
     useEffect(() => {
         if (loading) return;
         if (user) navigate("/home");
     }, [user, loading]);
 
-    function validateForm() {
-        if (!emailValid || !passValid) {
+	function validateForm() {
+        if(!emailValid || !passValid){
+            setErrorActive(true);
             return;
-        }
-    }
+        }else{
+            setErrorActive(false);
+			registerWithEmailAndPassword(email, password);
+		}
+	}
 
     return (
         <>
@@ -41,6 +47,7 @@ export default function Register() {
                     <h3 className={styles.registerForm__title}>Cadastro</h3>
                     <EmailInput />
                     <PasswordInput />
+                    <PassValidation />
                     <div className={classNames({
                         [styles.errorContainer]: true,
                         [styles.errorContainer__active]: errorActive
@@ -50,7 +57,7 @@ export default function Register() {
                     </div>
                     <div className={styles.buttonContainer}>
                         <button
-                            onClick={() => (validateForm(), register())}
+                            onClick={() => (validateForm())}
                             className={styles.buttonContainer__button}
                         >Continuar
                         </button>

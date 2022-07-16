@@ -41,7 +41,7 @@ export default function EmailInput() {
                     className={classNames({
                         [styles.formInput]: true,
                         [styles["userFormInput--active"]]: inputActive,
-                        [styles["formInput--invalid"]]: !emailValid
+                        [styles["formInput--invalid"]]: !emailValid,
                     })}
                     type="email"
                     placeholder="Usuário"

@@ -1,28 +1,43 @@
 import { UserContext } from "common/context/User";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import passIcon from "assets/login/pass-icon.png";
 import styles from "./Input.module.scss";
 import classNames from "classnames";
 
 export default function PasswordInput() {
-    const { password, setPassword, passValid, setPassValid, setErrorActive } = useContext(UserContext);
+    const { 
+        password, 
+        setPassword, 
+        passValid,
+        setPassValid,
+        minCharValid, 
+        upperCaseValid, 
+        lowerCaseValid, 
+        numberValid,
+        setMinCharValid,
+        setUpperCaseValid,
+        setLowerCaseValid,
+        setNumberValid
+    } = useContext(UserContext);
     const [inputActive, setInputActive] = useState(false);
     const [iconInactive, setIconInactive] = useState(false);
-    const isInitialMount = useRef(true);
 
     useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
-        } else {
-            if (password.length < 6) {
-                setErrorActive(true);
-                setPassValid(false);
-            } else {
-                setErrorActive(false);
-                setPassValid(true);
-            }
-        }
-    }, [password]);
+        const upperCaseRegex = /[A-Z]/;
+        const lowerCaseRegex = /[a-z]/;
+        const numberRegex = /[0-9]/;
+
+        password.length < 6 ? setMinCharValid(false) : setMinCharValid(true);
+        upperCaseRegex.test(password) ? setUpperCaseValid(true) : setUpperCaseValid(false);
+        lowerCaseRegex.test(password) ? setLowerCaseValid(true) : setLowerCaseValid(false);
+        numberRegex.test(password) ? setNumberValid(true) : setNumberValid(false);
+    }, [password])
+
+    function validatePassword() {
+        //checks if all values are "true"
+        const validations = [minCharValid, upperCaseValid, lowerCaseValid, numberValid];
+        validations.every(validation => validation) ? setPassValid(true) : setPassValid(false);
+    }
 
     function activateInput(input: HTMLInputElement) {
         setIconInactive(true);
@@ -47,7 +62,10 @@ export default function PasswordInput() {
                     placeholder="Senha"
                     value={password}
                     onFocus={(event) => activateInput(event.target)}
-                    onBlur={(event) => deactivateInput(event.target)}
+                    onBlur={(event) => (
+                        deactivateInput(event.target),
+                        validatePassword()
+                    )}
                     onChange={(event) => (setPassword(event.target.value))}
                 />
                 <img 

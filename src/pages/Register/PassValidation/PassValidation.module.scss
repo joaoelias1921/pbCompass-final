@@ -1,0 +1,34 @@
+@import "styles/variables";
+
+.checksContainer {
+    @include centered();
+    width: 100%;
+    border: 1px solid $login-font-error;
+    border-radius: 10px;
+    margin-bottom: 5%;
+    padding: 0 10px 10px 10px;
+ 
+    h3 {
+        font-size: 1rem;
+    }
+    
+    .checkRow{
+        @include centered();
+        width: 90%;
+        flex-direction: row;
+        justify-content: space-between;
+        p {
+            font-size: 0.9rem;
+            margin: 0;
+            margin-bottom: 1%;
+            margin-right: 5%;
+        }
+        .iconContainer {
+            @include centered();
+            width: 10%;
+            .invisible {
+                display: none;
+            }
+        }
+    }
+}
