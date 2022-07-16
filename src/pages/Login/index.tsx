@@ -1,5 +1,5 @@
 import styles from "./Login.module.scss";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "common/context/User";
 import classNames from "classnames";
@@ -12,7 +12,7 @@ export default function Login() {
 	const navigate = useNavigate();
 	const { email, password, emailValid, passValid } = useContext(UserContext);
 	const [errorActive, setErrorActive] = useState(false);
-	const [user, loading, error] = useAuthState(auth);
+	const [user, loading] = useAuthState(auth);
 
 	useEffect(() => {
 		if (loading) return;
@@ -59,6 +59,9 @@ export default function Login() {
 							className={styles.buttonContainer__button}
 						>Continuar
 						</button>
+					</div>
+					<div className={styles.registerAccount}>
+						<p>Não possui uma conta? Cadastre-se <Link className={styles.registerLink} to="/register">aqui!</Link></p>
 					</div>
 				</div>
 			</div>

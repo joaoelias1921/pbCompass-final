@@ -3,6 +3,7 @@ import Line from "assets/home/separation.png";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "common/context/User";
+import { logout } from "firebase.js";
 
 export default function Footer() {
 	const [counter, setCounter] = useState<number>(60);
@@ -16,6 +17,7 @@ export default function Footer() {
 				return countdown(time - 1);
 			}else {
 				clearContext(),
+				logout(),
 				navigate("/", {replace: true})
 			}
 		}, 1000);
@@ -68,6 +70,7 @@ export default function Footer() {
 					className={styles.logoutContainer__button}
 					onClick={() => (
 						clearContext(),
+						logout(),
 						navigate("/", {replace: true})
 					)}
 				>Logout

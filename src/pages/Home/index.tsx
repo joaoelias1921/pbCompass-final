@@ -2,8 +2,15 @@ import Footer from "components/Footer";
 import HomeHeader from "components/HomeHeader";
 import styles from "./Home.module.scss";
 import classNames from "classnames";
+import { useEffect } from "react";
+import { auth } from "firebase.js";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
+	const [user] = useAuthState(auth);
+	const navigate = useNavigate();
+
 	const texts = [{
 		en: "Our mission is",
 		pt: "Nossa missão é",
@@ -18,6 +25,14 @@ export default function Home() {
 		en: "that enable our client's growth",
 		pt: "que permitam o crescimento dos nossos clientes"
 	}];
+
+    useEffect(() => {
+        if(!user) {
+			alert("Você deve fazer login para acessar esta pagina!");
+			navigate("/");
+		}
+    }, [user]);
+
 	return (
 		<section className={styles.mainContainer}>
 			<HomeHeader />

@@ -74,6 +74,19 @@
 				}
 			}
 		}
+		.registerAccount {
+			@include centered();
+			width: 100%;
+			align-items: flex-start;
+			margin-top: 5%;
+			p {				
+				.registerLink {
+					text-decoration: none;		
+					font-weight: bold;			
+					color: $login-font-error;
+				}
+			}
+		}
 	}
 }
 

@@ -1,5 +1,5 @@
 import { UserContext } from "common/context/User";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import passIcon from "assets/login/pass-icon.png";
 import styles from "./Input.module.scss";
 import classNames from "classnames";
@@ -8,26 +8,19 @@ export default function PasswordInput() {
     const { password, setPassword, passValid, setPassValid, setErrorActive } = useContext(UserContext);
     const [inputActive, setInputActive] = useState(false);
     const [iconInactive, setIconInactive] = useState(false);
-
-    /*function validatePassword(password: HTMLInputElement) {
-        if (password.value.length < 3) {
-            password.style.border = "1px solid #E9B425";
-            setErrorActive(true);
-            setPassValid(false);
-        } else {
-            password.style.border = "";
-            setErrorActive(false);
-            setPassValid(true);
-        }
-    }*/
+    const isInitialMount = useRef(true);
 
     useEffect(() => {
-        if(password == "" || password.length < 3) {
-            setErrorActive(true);
-            setPassValid(false);
-        }else {
-            setErrorActive(false);
-            setPassValid(true);
+        if (isInitialMount.current) {
+            isInitialMount.current = false;
+        } else {
+            if (password.length < 6) {
+                setErrorActive(true);
+                setPassValid(false);
+            } else {
+                setErrorActive(false);
+                setPassValid(true);
+            }
         }
     }, [password]);
 
@@ -55,10 +48,7 @@ export default function PasswordInput() {
                     value={password}
                     onFocus={(event) => activateInput(event.target)}
                     onBlur={(event) => deactivateInput(event.target)}
-                    onChange={(event) => (
-                        setPassword(event.target.value)
-                        //validatePassword(event.target)
-                    )}
+                    onChange={(event) => (setPassword(event.target.value))}
                 />
                 <img 
                     className={classNames({
