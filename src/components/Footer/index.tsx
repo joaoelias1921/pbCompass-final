@@ -7,7 +7,7 @@ import { auth } from "firebase.js";
 import { signOut } from "firebase/auth";
 
 export default function Footer() {
-	const [counter, setCounter] = useState<number>(3);
+	const [counter, setCounter] = useState<number>(60);
 	const { setEmail, setEmailValid, setPassword, setPassValid } = useContext(UserLoginContext);
 	const navigate = useNavigate();
 

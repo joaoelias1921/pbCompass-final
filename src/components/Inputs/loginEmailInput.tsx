@@ -13,13 +13,10 @@ export default function LoginEmailInput() {
     } = useContext(UserLoginContext);
     const [inputActive, setInputActive] = useState(false);
     const [iconInactive, setIconInactive] = useState(false);
+    const regex = /^([a-z]){1,}([a-z0-9._-]){1,}([@]){1}([a-z]){2,}([.]){1}([a-z]){2,}([.]?){1}([a-z]?){2,}$/i;
 
     useEffect(() => {
-        if (!email.includes("@") || !email.includes(".com") || email == "") {
-            setEmailValid(false);
-        } else {
-            setEmailValid(true);
-        }
+        regex.test(email.toLowerCase()) ? setEmailValid(true) : setEmailValid(false);
     }, [email]);
 
     function activateInput(input: HTMLInputElement) {
