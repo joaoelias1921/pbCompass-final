@@ -1,9 +1,9 @@
 import { createContext, useState } from 'react';
 
-export const UserContext = createContext();
-UserContext.displayName = "User";
+export const RegisterContext = createContext();
+RegisterContext.displayName = "Registration";
 
-export const UserProvider = ({ children }) => {
+export const RegisterProvider = ({ children }) => {
     const [email, setEmail] = useState("");
     const [emailValid, setEmailValid] = useState(false);
     const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ export const UserProvider = ({ children }) => {
     const [lowerCaseValid, setLowerCaseValid] = useState(false);
     const [numberValid, setNumberValid] = useState(false);
     return (
-        <UserContext.Provider value={ {
+        <RegisterContext.Provider value={ {
             email, 
             setEmail, 
             emailValid,
@@ -35,6 +35,6 @@ export const UserProvider = ({ children }) => {
             setNumberValid
         }}>
             {children}
-        </UserContext.Provider>
+        </RegisterContext.Provider>
     )
 }

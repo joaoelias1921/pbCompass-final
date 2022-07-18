@@ -1,23 +1,28 @@
 import styles from "./Login.module.scss";
 import { useNavigate, Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { UserContext } from "common/context/User";
+import { UserLoginContext } from "common/context/UserLogin";
 import classNames from "classnames";
-import EmailInput from "components/Inputs/emailInput";
-import PasswordInput from "components/Inputs/passwordInput";
+import LoginEmailInput from "components/Inputs/loginEmailInput";
+import LoginPassInput from "components/Inputs/loginPassInput";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, logInWithEmailAndPassword } from "firebase.js";
+import { auth } from "firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
 	const navigate = useNavigate();
 	const { 
-		email, 
-		password, 
-		setEmailValid, 
+		email,
+		setEmail,
+		password,
+		setPassword,
+		passValid,
 		setPassValid,
+		emailValid,
+		setEmailValid,
 		errorActive, 
 		setErrorActive
-	} = useContext(UserContext);
+	} = useContext(UserLoginContext);
 	const [user, loading] = useAuthState(auth);
 
 	useEffect(() => {
@@ -26,17 +31,30 @@ export default function Login() {
 	}, [user, loading]);
 
 	function validateForm() {
-		if (email == "" && password == "") {
+		if(!emailValid || !passValid) {
 			setErrorActive(true);
-            setEmailValid(false);
-            setPassValid(false);
 			return;
-		}else if(email == "" || password == ""){
-            setErrorActive(true);
-            email == "" ? setEmailValid(false) : setPassValid(false);
-        }else{
+		}else{
+			setErrorActive(false);
 			logInWithEmailAndPassword(email, password);
 		}
+	}
+
+	//email and password login
+	const logInWithEmailAndPassword = async (email: string, password: string) => {
+		try {
+			await signInWithEmailAndPassword(auth, email, password);
+		} catch (err: any) {
+			setErrorActive(true);
+		}
+	};
+
+	function clearContext() {
+		setEmail("");
+		setPassword("");
+		setEmailValid(false);
+		setPassValid(false);
+		setErrorActive(false);
 	}
 
 	return (
@@ -48,8 +66,8 @@ export default function Login() {
 				</div>
 				<div className={styles.loginForm}>
 					<h3 className={styles.loginForm__title}>Login</h3>
-					<EmailInput />
-					<PasswordInput />
+					<LoginEmailInput />
+					<LoginPassInput />
 					<div className={classNames({
 						[styles.errorContainer]: true,
 						[styles.errorContainer__active]: errorActive
@@ -65,7 +83,7 @@ export default function Login() {
 						</button>
 					</div>
 					<div className={styles.registerAccount}>
-						<p>Não possui uma conta? Cadastre-se <Link className={styles.registerLink} to="/register">aqui!</Link></p>
+						<p>Não possui uma conta? Cadastre-se <Link onClick={clearContext} className={styles.registerLink} to="/register">aqui!</Link></p>
 					</div>
 				</div>
 			</div>

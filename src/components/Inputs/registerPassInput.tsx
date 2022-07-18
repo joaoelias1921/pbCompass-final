@@ -1,14 +1,13 @@
-import { UserContext } from "common/context/User";
+import { RegisterContext } from "common/context/Register";
 import { useContext, useEffect, useState } from "react";
 import passIcon from "assets/login/pass-icon.png";
 import styles from "./Input.module.scss";
 import classNames from "classnames";
 
-export default function PasswordInput() {
+export default function RegisterPassInput() {
     const { 
         password, 
         setPassword, 
-        passValid,
         setPassValid,
         minCharValid, 
         upperCaseValid, 
@@ -17,10 +16,12 @@ export default function PasswordInput() {
         setMinCharValid,
         setUpperCaseValid,
         setLowerCaseValid,
-        setNumberValid
-    } = useContext(UserContext);
+        setNumberValid,
+        errorActive
+    } = useContext(RegisterContext);
     const [inputActive, setInputActive] = useState(false);
-    const [iconInactive, setIconInactive] = useState(false);
+    const [iconInactive, setIconInactive] = useState(false);    
+    const validations = [minCharValid, upperCaseValid, lowerCaseValid, numberValid];
 
     useEffect(() => {
         const upperCaseRegex = /[A-Z]/;
@@ -35,8 +36,11 @@ export default function PasswordInput() {
 
     function validatePassword() {
         //checks if all values are "true"
-        const validations = [minCharValid, upperCaseValid, lowerCaseValid, numberValid];
-        validations.every(validation => validation) ? setPassValid(true) : setPassValid(false);
+        validations.every(allTrue) ? setPassValid(true) : setPassValid(false);
+    }
+
+    function allTrue(validation: boolean) {
+        return validation == true;
     }
 
     function activateInput(input: HTMLInputElement) {
@@ -56,7 +60,7 @@ export default function PasswordInput() {
                     className={classNames({
                         [styles.formInput]: true,
                         [styles["passFormInput--active"]]: inputActive,
-                        [styles["formInput--invalid"]]: !passValid
+                        [styles["formInput--invalid"]]: errorActive
                     })}
                     type="password"
                     placeholder="Senha"

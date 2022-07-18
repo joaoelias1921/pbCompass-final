@@ -1,24 +1,30 @@
 import styles from "./Register.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { UserContext } from "common/context/User";
+import { RegisterContext } from "common/context/Register";
 import classNames from "classnames";
-import EmailInput from "components/Inputs/emailInput";
-import PasswordInput from "components/Inputs/passwordInput";
+import RegisterEmailInput from "components/Inputs/registerEmailInput";
+import RegisterPasswordInput from "components/Inputs/registerPassInput";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { auth, registerWithEmailAndPassword } from "firebase.js";
+import { auth, db } from "firebase.js";
 import PassValidation from "./PassValidation";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
 
 export default function Register() {
     const navigate = useNavigate();
     const { 
-        email, 
-        password, 
+        email,
+        setEmail,
+        password,
+        setPassword,
         emailValid,
+        setEmailValid,
         passValid,
+        setPassValid,
         errorActive,
         setErrorActive,
-    } = useContext(UserContext);
+    } = useContext(RegisterContext);
     const [user, loading] = useAuthState(auth);
 
     useEffect(() => {
@@ -27,14 +33,33 @@ export default function Register() {
     }, [user, loading]);
 
 	function validateForm() {
-        if(!emailValid || !passValid){
-            setErrorActive(true);
-            return;
-        }else{
-            setErrorActive(false);
+		if(!emailValid || !passValid) {
+			setErrorActive(true);
+			return;
+		}else{
+			setErrorActive(false);
+            setEmail("");
+            setEmailValid(false);
+            setPassword("");
+            setPassValid(false);
 			registerWithEmailAndPassword(email, password);
 		}
 	}
+
+    //register user
+    const registerWithEmailAndPassword = async (email: string, password: string) => {
+        try {
+            const res = await createUserWithEmailAndPassword(auth, email, password);
+            const user = res.user;
+            await addDoc(collection(db, "users"), {
+                uid: user.uid,
+                authProvider: "local",
+                email,
+            });
+        } catch (err: any) {
+            setErrorActive(true);
+        }
+    };
 
     return (
         <>
@@ -45,8 +70,8 @@ export default function Register() {
                 </div>
                 <div className={styles.registerForm}>
                     <h3 className={styles.registerForm__title}>Cadastro</h3>
-                    <EmailInput />
-                    <PasswordInput />
+                    <RegisterEmailInput />
+                    <RegisterPasswordInput />
                     <PassValidation />
                     <div className={classNames({
                         [styles.errorContainer]: true,
@@ -59,7 +84,7 @@ export default function Register() {
                         <button
                             onClick={() => (validateForm())}
                             className={styles.buttonContainer__button}
-                        >Continuar
+                        >Cadastrar
                         </button>
                     </div>
                     <div className={styles.loginAccount}>

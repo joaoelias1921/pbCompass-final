@@ -3,7 +3,7 @@ import { MdOutlineErrorOutline as Invalid } from "react-icons/md";
 import { AiOutlineCheck as Valid } from "react-icons/ai";
 import classNames from "classnames";
 import { useContext } from "react";
-import { UserContext } from "common/context/User";
+import { RegisterContext } from "common/context/Register";
 
 export default function PassValidation() {
     const { 
@@ -11,7 +11,7 @@ export default function PassValidation() {
         upperCaseValid, 
         lowerCaseValid,
         numberValid
-    } = useContext(UserContext);
+    } = useContext(RegisterContext);
 
     return (
         <>

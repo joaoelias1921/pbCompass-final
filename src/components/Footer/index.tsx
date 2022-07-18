@@ -2,12 +2,13 @@ import styles from "./Footer.module.scss";
 import Line from "assets/home/separation.png";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "common/context/User";
-import { logout } from "firebase.js";
+import { UserLoginContext } from "common/context/UserLogin";
+import { auth } from "firebase.js";
+import { signOut } from "firebase/auth";
 
 export default function Footer() {
-	const [counter, setCounter] = useState<number>(60);
-	const { setEmail, setPassword } = useContext(UserContext);
+	const [counter, setCounter] = useState<number>(3);
+	const { setEmail, setEmailValid, setPassword, setPassValid } = useContext(UserLoginContext);
 	const navigate = useNavigate();
 
 	function countdown(time: number = 0) {
@@ -34,9 +35,16 @@ export default function Footer() {
 		};
 	}, []);
 
+	//logout
+	const logout = async () => {
+		await signOut(auth);
+	};
+
 	function clearContext() {
 		setEmail("");
 		setPassword("");
+		setEmailValid(false);
+		setPassValid(false);
 	}
 
 	return (

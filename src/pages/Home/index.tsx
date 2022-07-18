@@ -8,7 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-	const [user] = useAuthState(auth);
+	const [user, loading] = useAuthState(auth);
 	const navigate = useNavigate();
 
 	const texts = [{
@@ -27,11 +27,12 @@ export default function Home() {
 	}];
 
     useEffect(() => {
-        if(!user) {
+		if(loading) return;
+		if(!user) {
 			alert("Você deve fazer login para acessar esta pagina!");
 			navigate("/");
 		}
-    }, [user]);
+    }, [user, loading]);
 
 	return (
 		<section className={styles.mainContainer}>

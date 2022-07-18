@@ -1,26 +1,24 @@
-import { UserContext } from "common/context/User";
-import { useContext, useEffect, useRef, useState } from "react";
+import { RegisterContext } from "common/context/Register";
+import { useContext, useEffect, useState } from "react";
 import userIcon from "assets/login/user-icon.png";
 import styles from "./Input.module.scss";
 import classNames from "classnames";
 
-export default function EmailInput() {
-    const { email, setEmail, emailValid, setEmailValid, setErrorActive } = useContext(UserContext);
+export default function LoginEmailInput() {
+    const { 
+        email, 
+        setEmail, 
+        setEmailValid, 
+        errorActive, 
+    } = useContext(RegisterContext);
     const [inputActive, setInputActive] = useState(false);
     const [iconInactive, setIconInactive] = useState(false);
-    const isInitialMount = useRef(true);
 
     useEffect(() => {
-        if (isInitialMount.current) {
-            isInitialMount.current = false;
+        if (!email.includes("@") || !email.includes(".com") || email == "") {
+            setEmailValid(false);
         } else {
-            if (!email.includes("@") || !email.includes(".com") || email == "") {
-                setErrorActive(true);
-                setEmailValid(false);
-            } else {
-                setErrorActive(false);
-                setEmailValid(true);
-            }
+            setEmailValid(true);
         }
     }, [email]);
 
@@ -41,7 +39,7 @@ export default function EmailInput() {
                     className={classNames({
                         [styles.formInput]: true,
                         [styles["userFormInput--active"]]: inputActive,
-                        [styles["formInput--invalid"]]: !emailValid,
+                        [styles["formInput--invalid"]]: errorActive
                     })}
                     type="email"
                     placeholder="Usuário"
