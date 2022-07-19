@@ -46,6 +46,7 @@ export default function Login() {
 			await signInWithEmailAndPassword(auth, email, password);
 		} catch (err: any) {
 			setErrorActive(true);
+			console.log(err.message);
 		}
 	};
 

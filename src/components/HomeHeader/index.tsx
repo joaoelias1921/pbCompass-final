@@ -1,7 +1,7 @@
 import styles from "./HomeHeader.module.scss";
 import Logo from "assets/home/compass-logo-dark.png";
-import Time from "pages/Home/Time";
-import Weather from "pages/Home/Weather";
+import Time from "./Time";
+import Weather from "./Weather";
 
 export default function HomeHeader() {
 	return (

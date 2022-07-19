@@ -17,7 +17,7 @@ export default function Footer() {
 				setCounter(time - 1);
 				return countdown(time - 1);
 			}else {
-				clearContext(),
+				clearContext(),		
 				logout(),
 				navigate("/", {replace: true})
 			}
@@ -26,12 +26,12 @@ export default function Footer() {
 
 	useEffect(() => {
 		countdown(counter);
-	});
+	}, []);	
 
 	//cleaning state on component unmount to prevent errors/warnings
 	useEffect(() => {
 		return () => {
-		  setCounter(0); 
+			setCounter(0); 
 		};
 	}, []);
 

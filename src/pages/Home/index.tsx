@@ -6,30 +6,16 @@ import { useEffect } from "react";
 import { auth } from "firebase.js";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
+import texts from "data/homeText.json";
 
 export default function Home() {
 	const [user, loading] = useAuthState(auth);
 	const navigate = useNavigate();
 
-	const texts = [{
-		en: "Our mission is",
-		pt: "Nossa missão é",
-		small: true
-	}, {
-		en: "to transform the world",
-		pt: "transformar o mundo"
-	}, {
-		en: "building digital experiences",
-		pt: "construindo experiências digitais"
-	}, {
-		en: "that enable our client's growth",
-		pt: "que permitam o crescimento dos nossos clientes"
-	}];
-
     useEffect(() => {
 		if(loading) return;
 		if(!user) {
-			alert("Você deve fazer login para acessar esta pagina!");
+			alert("Você deve fazer login para acessar esta página!");
 			navigate("/");
 		}
     }, [user, loading]);
