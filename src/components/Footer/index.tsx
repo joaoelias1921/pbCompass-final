@@ -17,28 +17,21 @@ export default function Footer() {
 				setCounter(time - 1);
 				return countdown(time - 1);
 			}else {
-				clearContext(),
-				logout(),
-				navigate("/", {replace: true})
+				setCounter(0);
+				return countdown(0);
 			}
 		}, 1000);
 	}
 
 	useEffect(() => {
-		countdown(counter);
+		counter == 0 ? logout() : countdown(counter);
 	});	
 
-	//cleaning state on component unmount to prevent errors/warnings
-	useEffect(() => {
-		return () => {
-			setCounter(0); 
-		};
-	}, []);
-
-	//logout
-	const logout = async () => {
+	async function logout() {
+		clearContext(),
 		await signOut(auth);
-	};
+		navigate("/", {replace: true})
+	}	
 
 	function clearContext() {
 		setEmail("");
