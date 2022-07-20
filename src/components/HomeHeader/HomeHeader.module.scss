@@ -11,3 +11,25 @@
 		padding: 15px;
 	}
 }
+
+@media screen and(max-width: 425px) {
+	.topContainer {
+		flex-direction: row;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		&__weather, &__logo {
+			width: 50%;
+		}
+		&__logo {
+			order: 0;
+		}
+		&__weather {
+			order: 1;
+		}
+		&__time  {
+			order: 2;
+			margin-bottom: 10%;
+		}
+	}
+}
