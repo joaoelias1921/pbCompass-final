@@ -50,6 +50,7 @@ export default function Register() {
     const registerWithEmailAndPassword = async (email: string, password: string) => {
         try {
             const res = await createUserWithEmailAndPassword(auth, email, password);
+            localStorage.setItem("counter", "60");
             const user = res.user;
             await addDoc(collection(db, "users"), {
                 uid: user.uid,

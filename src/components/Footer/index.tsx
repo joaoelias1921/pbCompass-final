@@ -1,13 +1,13 @@
 import styles from "./Footer.module.scss";
 import Line from "assets/home/separation.png";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserLoginContext } from "common/context/UserLogin";
 import { auth } from "firebase.js";
-import { signOut } from "firebase/auth";
+import { onAuthStateChanged, signOut } from "firebase/auth";
 
 export default function Footer() {
-	const [counter, setCounter] = useState<number>(60);
+	const [counter, setCounter] = useState<number>(Number(localStorage.getItem("counter")));
 	const { setEmail, setEmailValid, setPassword, setPassValid } = useContext(UserLoginContext);
 	const navigate = useNavigate();
 
@@ -24,11 +24,13 @@ export default function Footer() {
 	}
 
 	useEffect(() => {
-		counter == 0 ? logout() : countdown(counter);
-	});	
+		counter != 0 && localStorage.setItem("counter", counter.toString());
+		counter == 0 ? logout() : countdown(Number(localStorage.getItem("counter")));
+	});
 
 	async function logout() {
 		clearContext(),
+		localStorage.setItem("counter", "60");
 		await signOut(auth);
 		navigate("/", {replace: true})
 	}	

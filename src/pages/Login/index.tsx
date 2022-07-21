@@ -35,15 +35,16 @@ export default function Login() {
 			setErrorActive(true);
 			return;
 		}else{
-			setErrorActive(false);
+			setErrorActive(false);			
 			logInWithEmailAndPassword(email, password);
 		}
 	}
 
 	//email and password login
 	const logInWithEmailAndPassword = async (email: string, password: string) => {
-		try {
+		try {			
 			await signInWithEmailAndPassword(auth, email, password);
+			localStorage.setItem("counter", "60");
 		} catch (err: any) {
 			setErrorActive(true);
 			console.log(err.message);
