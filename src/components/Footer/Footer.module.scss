@@ -126,11 +126,14 @@
 				}
 			}
 			&__textRight {
+				width: 30%;
+				justify-content: center;
 				margin-bottom: 5%;
 				.appRefresh {
 					font-size: 0.9rem;
 				}
 				.counterContainer {
+					width: 50%;
 					span {
 						font-size: 2.5rem;
 					}
@@ -157,17 +160,18 @@
 				margin: 0;
 				p {
 					font-size: 0.8rem;
-					text-align: center;
 				}
 			}
 			&__textRight {
 				margin-bottom: 5%;
+				width: 40%;
+				align-items: center;
 				.appRefresh {
 					width: 100%;
 				}
-				.counterContainer {
-					margin-left: 20%;
-				}
+			}
+			.counterContainer {
+				margin-left: 10%;
 			}
 		}
 		.linkContainer {

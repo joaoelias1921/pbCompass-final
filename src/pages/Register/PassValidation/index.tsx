@@ -18,7 +18,7 @@ export default function PassValidation() {
             <div className={styles.checksContainer}>
                 <h3>Sua senha deve possuir:</h3>
                 <div className={styles.checkRow}>
-                    <p>Mínimo de 6 caracteres</p>
+                    <p>Pelo menos 6 caracteres</p>
                     <div className={styles.iconContainer}>
                         <Invalid color="lightcoral" className={classNames({
                             [styles.invisible]: minCharValid,
