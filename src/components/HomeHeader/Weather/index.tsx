@@ -6,48 +6,34 @@ export default function Weather() {
     const [degrees, setDegrees] = useState<number>(0);
     const [city, setCity] = useState("Buscando...");
 
-    function checkPermission(){
-        //getCurrentPosition displays a prompt for the user, to allow or block geolocation
-        navigator.geolocation.getCurrentPosition(() => {});
-        navigator.permissions.query({ name: "geolocation" })
-            .then(function(permissionStatus) {
-                if(permissionStatus.state == "granted") {
-                    fetchWeather(true);
-                }else {                    
-                    fetchWeather(false);
-                }
-            });    
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition(async function (position) {
+            let lat = position.coords.latitude;
+            let long = position.coords.longitude;
+
+            await fetch(`https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=bf0de12f9df4e3c21f2fb18a7606c041`)
+                .then(res => res.json())
+                .then(result => {
+                    const { main, name } = result;
+                    setWeather(name, main);
+                });
+        }, fetchStandardWeather()
+        );
+    }, []);
+
+    function fetchStandardWeather(): any {
+        fetch("https://api.openweathermap.org/data/2.5/weather?q=Florianopolis&units=metric&appid=ab85ba57bbbb423fb62bfb8201126ede")
+            .then(res => res.json())
+            .then(result => {
+                const {main, name } = result;
+                setWeather(name, main);
+        });
     }
 
     function setWeather(name: string, main: any) {
         setCity(`${name} - SC`)
         setDegrees(Math.round(main.temp));
     }
-
-    function fetchWeather(granted: boolean) {
-        granted
-            ? navigator.geolocation.getCurrentPosition(async function(position) {
-                let lat = position.coords.latitude;
-                let long = position.coords.longitude;        
-
-                await fetch(`https://api.openweathermap.org/data/2.5/weather/?lat=${lat}&lon=${long}&units=metric&APPID=bf0de12f9df4e3c21f2fb18a7606c041`)
-                .then(res => res.json())
-                .then(result => {
-                    const { main, name } = result;
-                    setWeather(name, main);
-                });
-            })
-            : fetch("https://api.openweathermap.org/data/2.5/weather?q=Florianopolis&units=metric&appid=ab85ba57bbbb423fb62bfb8201126ede")
-                .then(res => res.json())
-                .then(result => {
-                    const {main, name } = result;
-                    setWeather(name, main);
-                });
-    }
-
-    useEffect(() => {
-        checkPermission();
-    });
 
     return (
         <>
