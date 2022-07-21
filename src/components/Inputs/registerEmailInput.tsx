@@ -19,15 +19,11 @@ export default function LoginEmailInput() {
         regex.test(email.toLowerCase()) ? setEmailValid(true) : setEmailValid(false);
     }, [email]);
 
-    function activateInput(input: HTMLInputElement) {
+    function activateInput(input: EventTarget) {
         setIconInactive(true);
         setInputActive(true);
     }
 
-    function deactivateInput(input: HTMLInputElement) {
-        setIconInactive(false);
-        setInputActive(false);
-    }
 
     return (
         <>
@@ -41,8 +37,7 @@ export default function LoginEmailInput() {
                     type="email"
                     placeholder="Usuário"
                     value={email}
-                    onFocus={(event) => activateInput(event.target)}
-                    onBlur={(event) => deactivateInput(event.target)}
+                    onInput={(event) => activateInput(event.target)}
                     onChange={(event) => (setEmail(event.target.value))}
                 />
                 <img

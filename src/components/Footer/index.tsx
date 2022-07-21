@@ -25,7 +25,7 @@ export default function Footer() {
 
 	useEffect(() => {
 		counter != 0 && localStorage.setItem("counter", counter.toString());
-		counter == 0 ? logout() : countdown(Number(localStorage.getItem("counter")));
+		//counter == 0 ? logout() : countdown(Number(localStorage.getItem("counter")));
 	});
 
 	async function logout() {

@@ -32,6 +32,7 @@
 			@include centered();
 			display: none;
 			width: 100%;
+			margin: 5% auto;
 			p {
 				color: $login-font-error;
 				font-weight: bold;
@@ -80,11 +81,41 @@
 }
 
 
+@media screen and(max-width: 1024px) {
+	.registerContainer {
+		width: 60%;
+		.titleContainer {
+			margin-bottom: 10%;
+		}
+	}
+}
+
 @media screen and(max-width: 768px) {
-	.mainContainer {
-		flex-direction: column;
-		.leftContainer {
-			width: 100%;
+	.registerContainer {
+		margin: 10% auto;
+		.titleContainer {
+			margin-bottom: 8%;
+			&__text {
+				font-size: 0.9rem;
+			}
+		}
+	}
+}
+
+@media screen and(max-width: 425px) {
+	.registerContainer {
+		width: 80%;
+	}
+}
+
+@media screen and(max-width: 320px) {
+	.registerContainer {
+		.registerForm {
+			.loginAccount {
+				p {
+					font-size: 0.9rem;
+				}
+			}
 		}
 	}
 }

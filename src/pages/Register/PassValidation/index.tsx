@@ -31,7 +31,7 @@ export default function PassValidation() {
                     </div>
                 </div>
                 <div className={styles.checkRow}>
-                    <p>Pelo menos uma letra maiúscula</p>
+                    <p>Uma letra maiúscula</p>
                     <div className={styles.iconContainer}>
                         <Invalid color="lightcoral" className={classNames({
                             [styles.invisible]: upperCaseValid,
@@ -44,7 +44,7 @@ export default function PassValidation() {
                     </div>
                 </div>
                 <div className={styles.checkRow}>
-                    <p>Pelo menos uma letra minúscula</p>
+                    <p>Uma letra minúscula</p>
                     <div className={styles.iconContainer}>
                         <Invalid color="lightcoral" className={classNames({
                             [styles.invisible]: lowerCaseValid,
@@ -57,7 +57,7 @@ export default function PassValidation() {
                     </div>
                 </div>
                 <div className={styles.checkRow}>
-                    <p>Pelo menos um número</p>
+                    <p>Um número</p>
                     <div className={styles.iconContainer}>
                         <Invalid color="lightcoral" className={classNames({
                             [styles.invisible]: numberValid,

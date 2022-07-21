@@ -43,14 +43,9 @@ export default function RegisterPassInput() {
         return validation == true;
     }
 
-    function activateInput(input: HTMLInputElement) {
+    function activateInput(input: EventTarget) {
         setIconInactive(true);
         setInputActive(true);
-    }
-
-    function deactivateInput(input: HTMLInputElement) {
-        setIconInactive(false);
-        setInputActive(false);
     }
 
     return (
@@ -65,11 +60,8 @@ export default function RegisterPassInput() {
                     type="password"
                     placeholder="Senha"
                     value={password}
-                    onFocus={(event) => activateInput(event.target)}
-                    onBlur={(event) => (
-                        deactivateInput(event.target),
-                        validatePassword()
-                    )}
+                    onInput={(event) => activateInput(event.target)}
+                    onBlur={() => (validatePassword())}
                     onChange={(event) => (setPassword(event.target.value))}
                 />
                 <img 

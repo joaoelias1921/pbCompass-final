@@ -18,15 +18,11 @@ export default function LoginPassInput() {
         password.length < 6 ? setPassValid(false) : setPassValid(true);
     }, [password]);
 
-    function activateInput(input: HTMLInputElement) {
+    function activateInput(input: EventTarget) {
         setIconInactive(true);
         setInputActive(true);
     }
 
-    function deactivateInput(input: HTMLInputElement) {
-        setIconInactive(false);
-        setInputActive(false);
-    }
 
     return (
         <>
@@ -40,8 +36,7 @@ export default function LoginPassInput() {
                     type="password"
                     placeholder="Senha"
                     value={password}
-                    onFocus={(event) => activateInput(event.target)}
-                    onBlur={(event) => (deactivateInput(event.target))}
+                    onInput={(event) => activateInput(event.target)}
                     onChange={(event) => (setPassword(event.target.value))}
                 />
                 <img 

@@ -14,7 +14,6 @@
         border-radius: 30px;
         font-size: 0.8rem;
         padding: 15px;
-        margin-right: 4%;
         transition: 240ms ease-in-out;
         &:hover, &:focus {
             background-color: $gradient-dark;
@@ -23,6 +22,7 @@
 
     .userIcon, .passIcon {
         width: 15px;
+        margin-left: 4%;
     }
 
     .formInput--invalid {

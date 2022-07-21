@@ -47,17 +47,41 @@
 	}
 }
 
+@media screen and(max-width: 1024px) {
+	.mainContainer {
+		.mainContent {
+			.textsContainer {
+				&__engText {
+					font-size: 2rem;
+				}
+				&__engText--small {
+					font-size: 1.4rem;
+				}
+			}
+		}
+	}
+}
+
 @media screen and(max-width: 768px) {
 	.mainContainer {
 		.mainContent {
-			background-size: 250px;
+			background-image: none;
+			flex-direction: column;
 			.textsContainer {
-				width: 60%;
+				width: 100%;
+				margin: 10% auto;
+				&__textBox {
+					margin-bottom: 2%;
+					margin-right: 15%;
+				}
 				&__engText {
-					font-size: 1.8rem;
+					font-size: 2.2rem;
 				}
 				&__engText--small {
-					font-size: 1.3rem;
+					font-size: 1.4rem;
+				}
+				&__ptText {
+					font-size: 1.2rem;
 				}
 			}
 		}
@@ -66,21 +90,10 @@
 
 @media screen and(max-width: 425px) {
 	.mainContainer {
-		.mainContent {
-			flex-direction: column-reverse;
-			background-image: none;
-			.largeBgContainer {
-				width: 100%;
-				height: 50vh;
-				background-image: url("../../assets/home/compasslogo-large.png");
-				background-size: 300px;
-				background-repeat: no-repeat;
-			}
+		.mainContent {			
 			.textsContainer {
 				width: 100%;
-				&__textBox {
-					margin-right: 15%;
-				}
+				margin-bottom: 15%;
 				&__engText {
 					font-size: 1.5rem;
 				}
@@ -99,6 +112,7 @@
 	.mainContainer {
 		.mainContent {
 			.textsContainer {
+				margin: 15% auto;
 				&__textBox {
 					margin-right: 10%;
 				}
@@ -117,6 +131,7 @@
 	.mainContainer {
 		.mainContent {
 			.textsContainer {
+				margin: 20% auto;
 				&__engText {
 					font-size: 1.2rem;
 				}
