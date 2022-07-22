@@ -10,8 +10,7 @@
     &__weather {
         @include centered();
         width: 100%;
-        margin-top: 5%;
-        justify-content: flex-start;
+        margin-top: 2%;
         flex-direction: row;
         span {
             margin-left: 8%;
